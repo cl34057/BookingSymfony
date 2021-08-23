@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ad.title}} {% endblock %}
+{% block body %}
+            
+           <!--<div class="ad-title" style="background-image:url({{ad.coverImage}})">-->
+           
+                 <div class="container">
+               
+                    <h1>{{ad.title}}</h1>
+                <p>{{ad.introduction}}</p>
+                <p class="h5">{{ad.rooms}} chambres pour <strong> {{ad.price}} &euro;/nuit </strong></p>
+                <a href="#" class="btn btn-success">Reserver !</a>
+                
+                </div>
+            <!--</div>-->
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        {{ad.content|raw}}
+                        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-indicators">
+                                      {% for image in ad.images %}
+                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{loop.index0}}" class=" {% if loop.first %}active{% endif %}">" aria-current="true" aria-label="Slide 1"></button>
+                                   
+                                     {% endfor %}
+                                </div>
+                                <div class="carousel-inner">
+                                    {% for image in ad.images %}
+
+                                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                     <img src="{{image.url}}" class="d-block w-100" alt="...">
+                                     <div class="carousel-caption d-none d-md-block">
+                                        <h5>  {{ad.title}}</h5>
+                                        <p>{{image.caption}}</p>
+                                    </div>
+                                    </div>
+                                   {% endfor %}
+                                </div>
+
+                               
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Precedent</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Suivant</span>
+                                </button>
+                    </div>
+
+
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-4">
+                                <img src="http://placehold.it/64x64" alt="">
+                            </div>
+                            <div class="col">
+                                <h3>francis R</h3>
+                                <!--<span class="badge badge-warning">3 annonces</span>-->
+                                <button type="button" class="btn btn-info">
+                                        Annonce(s) <span class="badge badge-info">3</span>
+                                </button>
+                            </div>
+
+                        </div>
+                        <p><i><span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi praesentium architecto totam aperiam molestias quasi, hic fugiat alias id molestiae sit cumque vero sint necessitatibus nihil consectetur dolores tempora nemo?</span><br>
+                        <span>Eius vitae veritatis quas dignissimos quod eveniet suscipit odio sint, ad quos obcaecati libero rem tenetur perferendis nesciunt facere illum voluptatum fugiat quis, doloremque nobis repellat ea. Odio, incidunt vero!</span><br>
+                        <span>Atque nesciunt quo consequatur, dignissimos consequuntur odio, sapiente accusamus dolorem veniam soluta saepe, quis error dolorum! Exercitationem commodi ratione praesentium, voluptates nemo asperiores ducimus! Deserunt, distinctio magnam. Recusandae, dolor aspernatur!</span></i></p>
+                    </div>
+                </div>
+
+            </div>
+
+{% endblock %}
