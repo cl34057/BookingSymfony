@@ -1,10 +1,13 @@
 body{background-color: #f3efef;}
-.container{margin-top:1.2em;}
-.ad-title{background-size: cover;background-position: center center;padding: 1em;}
-.ad-title .container{margin-top:0;}
-.ad-title h1,.ad-title p{color: #fff;text-shadow: 3px 3px 3px rgba(0,0,0,0.5);}
+.container{margin-top:1.2em;margin-bottom:5em;}
+.prod-title{background-size: cover;background-position: center center;padding: 1em;}
+.prod-title, .container{margin-top:0;}
+.prod-title h1,.prod-title p{color: #fff;text-shadow: 3px 3px 3px rgba(0,0,0,0.5);}
 
-
+.caroussel-caption{text-shadow:3px 3px 3px rgba(0,0,0,0.5);}
+.avatar{width:128px;height:128px;border-radius:50%;}
+.avatar-medium{max-width:64px;max-height:64px;}
+.avatar-small{max-width:32px;max-height:32px;}
 footer{position:fixed;bottom:0;width:100%;color:"#f3efef";}
 /*remonter le texte dans le caroussel
 

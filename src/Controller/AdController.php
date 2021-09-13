@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
 class AdController extends AbstractController
 {
     /**
@@ -39,8 +40,8 @@ class AdController extends AbstractController
      *@route("/ads/new",name="ads_create")
      * @return response
      */
-   // public function create(Request $request,ObjectManager $manager){
-    public function create(Request $request,ManagerRegistry $manager){
+   
+    public function create(Request $request,EntityManagerInterface $manager){
             //fabricant de formulaire FORMBUILDER
             $ad= new Ad();
            
@@ -51,7 +52,7 @@ class AdController extends AbstractController
             $form-> handleRequest($request);
 
 
-             
+             //s'il est valide et il a été soumis
                 if($form->isSubmitted() && $form->isValid()){
                         //si le formulaire est soumisET si le formulaire est valide, on demande à Doctrine de sauvegarder
                         //ces données dans l'objet $manager
@@ -69,8 +70,9 @@ class AdController extends AbstractController
                                         $manager->persist($image);
 
                                  }
-
-                        $manager = $manager->getManager();
+                                
+                         $ad->setAuthor($this->getUser());
+                     
                         $manager ->persist($ad);
                         $manager->flush();
 
