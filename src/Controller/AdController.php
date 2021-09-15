@@ -12,8 +12,12 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 
 
 class AdController extends AbstractController
@@ -37,7 +41,8 @@ class AdController extends AbstractController
     }
      /**
      * Permet de creer une annonce
-     *@route("/ads/new",name="ads_create")
+     * @route("/ads/new",name="ads_create")
+     * @IsGranted("ROLE_USER")
      * @return response
      */
    
@@ -106,7 +111,7 @@ class AdController extends AbstractController
     /**
      * Permet d'editer et modifier un article
      * @Route("/ads/{slug}/edit", name="ads_edit")
-     * 
+     * @security("is_granted('ROLE_USER') and user === ad.getAuthor()",message="Cette annonce ne vous appartient pas, Vous ne pouvez pas modifier")
      */
    
     //public function edit(Ad $ad,Request $request,ManagerRegistry $manager){
@@ -151,4 +156,39 @@ class AdController extends AbstractController
                    
         return $this->render('ad/edit.html.twig',['form'=>$form->createView(),'ad'=>$ad]);
     }
+    /**
+     * suppression d'une annonce
+     * @Route("/ads/{slug}/delete",name="ads_delete")
+     * @Security("is_granted('ROLE_USER') and user == ad.gatAuthor()",message="Vous n'avez pas le droit d'accéder à cette ressource")
+     * @param Ad $ad
+     * @param EntityManagerInterface $entityManager
+     * @return void
+     */
+
+    public function delete(Ad $ad,EntityManagerInterface $entityManager){
+        $entityManager->remove($ad);
+
+        $entityManager->flush();
+        $this->addFlash("success","L'annonce  <em>{$ad->getTitle()}</em> a bien été supprimé");
+
+        return $this->redirectToRoute("ads_list");
+
+    }
+
+    /**
+     * Methode pour ajouter 10 au prix de l'annonce
+     * @Route("/ads/{id}/ajax",options={"expose"=true},name="ads_prix")
+     *
+     * @return response
+     */
+    public function augment(Ad $ad){
+
+        $ad->setPrice($ad->getPrice() +10);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($ad);
+        $entityManager->flush();
+
+        return new JsonResponse(['success'=>200]);
+    }
 }
+
