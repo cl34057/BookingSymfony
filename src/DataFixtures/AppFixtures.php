@@ -7,6 +7,7 @@ use Faker\Factory;
 use App\Entity\Role;
 use App\Entity\User;
 use App\Entity\Image;
+use App\Entity\Booking;
 use Cocur\Slugify\Slugify;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -83,7 +84,7 @@ class AppFixtures extends Fixture
 
                 //Annonces
 
-            for($i=1; $i<=mt_rand(2,5);$i++){
+            for($i=1; $i<=30;$i++){
                     $ad = new Ad();
 
                     $title = $faker->sentence();
@@ -119,7 +120,36 @@ class AppFixtures extends Fixture
                         $manager ->persist($image);
 
                     }
-                     }
+                    // Gestion des reservations
+                    for($k=1;$k <= mt_rand(0,5);$k++){
+                        $booking = new Booking();
+                            //définir nos variables
+                        $createdAt = $faker->dateTimeBetween('-6 months');
+                        $startDate = $faker->dateTimeBetween('-3 months');
+                        $duration = mt_rand(3,10);
+                        $endDate = (clone $startDate)->modify("+ $duration days");
+                        $amount = $ad->getPrice() * $duration;
+
+                        //trouver le booker(la personne qui va réserver)
+                        $booker = $users[mt_rand(0,count($users)-1)];
+                        $comment= $faker->paragraph();
+
+                        //configuration de la réservation
+                        $booking->setBooker($booker)
+                                ->setAd($ad)
+                                ->setStartDate($startDate)
+                                ->setEndDate($endDate)
+                                ->setCreatedAt($createdAt)
+                                ->setAmount($amount)
+                                ->setComment($comment)
+                                ;
+
+                                //persister
+
+                                $manager->persist($booking);
+                    }
+
+                 }
              }
              //enregistre 
         $manager->flush();

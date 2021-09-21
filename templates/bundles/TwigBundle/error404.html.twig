@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block title %}Waouhhh ! Page non trouvée les gars {% endblock %}
+{% block body %}
+<main class="container text-center">
+
+    <h1>Oups ! La page demandée n'existe pas.
+    </h1>
+    <h2 class="h4 mt-3">Merci de revenir à l'acceuil ou contacter l'Administrateur du site</h2>
+    <div class="text-center mt-5">
+            <a href="{{path('homepage')}}" class="btn btn-primary">Retour à l'acceuil</a>
+            <a href="{{path('ads_list')}}" class="btn btn-secondary">Retour aux annonces></a>
+            
+    </div>
+
+</main>
+
+
+{% endblock %}
