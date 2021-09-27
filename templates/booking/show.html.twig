@@ -40,12 +40,11 @@
                              <dt class="col-md-4">Montant total :</dt>
                            <dd class="col-md-8">{{booking.amount}}</dd>
                              <dt class="col-md-4">Commentaire :</dt>
-                           <dd class="col-md-8">{{booking.comment}}</dd>
-                           
-                       
+                           <dd class="col-md-8">{{booking.comment | default('Aucun commentaire')}}</dd>
+                                       
                     
                     </dl>
-
+                    <hr>
                     <h3 class="alert-headind"> Propriétaire du Bien</h3>
                     <div class="row">
                         <div class="col-md-3">
@@ -65,6 +64,38 @@
                
                     
                     </div>
+                    <hr>
+                      <div class="alert alert-light" id="comment">
+                      
+                            <h3 class="alert-heading h5">Votre avis nous interesse</h3>
+
+                            {% if date() > date(booking.endDate) %}
+
+                                      {% set comment = booking.ad.commentFromAuthor(app.user) %}
+
+                                      {% if comment is not null%}
+
+                                          <blockquote>{{comment.content}}</blockquote>
+                                          <strong>Note: </strong> {% include 'inc/rating.html.twig' with {'rating':comment.rating}%}
+                                     {% else %}
+
+
+                                          {{form_start(form)}}
+                                          {{form_widget(form)}}
+                                              <button type="submit" class="btn btn-primary mt-2">Envoyer</button>
+                                          {{form_end(form)}}
+
+                                     {% endif %}
+                      
+                            {% else %}
+
+                                     <p class="alert alert-warning"> Vous ne pouvez pas noté cette annonce tant que votre séjour ne sera pas terminé </p>
+                            {% endif %}
+                      
+                      </div>
+
+
+
                 </div>  
             </div>
             <div class="col">

@@ -7,13 +7,14 @@
         <link rel="stylesheet" href="https://fontawesome.com/kits/9e1a2dbe42/use">  
         <link rel="stylesheet" href="/css/bootstrap.min.css">
         <link rel="stylesheet" href= "/css/app.css">
+        <link rel="stylesheet" href= "/css/admin.css">
         {% block stylesheets %}{% endblock %}
         <script src="/js/jquery.min.js"></script>     
 
     </head>
             
     <body>
-        {% include 'inc/header.html.twig' %}
+        {% include '/admin/inc/header.html.twig' %}
       
          <!--Message Flash,On met à l'interieur d'une boucle-->
         {% for label,messages in app.flashes %}
@@ -35,7 +36,7 @@
        {% block body %}{% endblock %}
       
  
-         {% include 'inc/footer.html.twig' %}   
+         {% include 'admin/inc/footer.html.twig' %}   
      {% block javascripts %}{% endblock %}     
    
     </body>

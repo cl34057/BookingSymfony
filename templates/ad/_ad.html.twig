@@ -20,8 +20,18 @@
                         {% endif %}
                    
                     </div>
-                <div class="card-footer text-muted">
-                <span>Pas encore noté</span>
+                <div class="card-footer text-muted text-center">
+                <!---Afficher les notes sur toutes les annonces-->
+                {% if ad.comments | length > 0 %}
+                      {% include 'inc/rating.html.twig' with {'rating': ad.averageRatings} %} sur {{ad.comments|length}} avis
+
+                
+                {% else %}
+                      <span>Pas encore noté</span>
+                {% endif %}
+
                 </div>
+
+
             </div>
         </div>

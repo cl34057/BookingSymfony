@@ -7,12 +7,22 @@ a:hover{color:indianred;}
 .prod-title{background-size: cover;background-position: center center;padding: 1em;}
 .prod-title, .container{margin-top:0;}
 .prod-title h1,.prod-title p{color: #fff;text-shadow: 3px 3px 3px rgba(0,0,0,0.5);}
-
+ 
 .caroussel-caption{text-shadow:3px 3px 3px rgba(0,0,0,0.5);}
 .avatar{width:128px;height:128px;border-radius:50%;}
 .avatar-medium{max-width:64px;max-height:64px;}
 .avatar-small{max-width:32px;max-height:32px;}
+.avatar-xs{max-width:26px;max-height:26px;}
 footer{position:fixed;bottom:0;width:100%;color:"#f3efef";}
 
 
 .datepicker table tr td.disabled, .datepicker table tr td.disabled:hover{color:indianred!important;text-decoration:line-through}
+blockquote{font-style:oblique;color:rgb(62, 87, 110);}
+.rating i{color:goldenrod;}
+.note{text-align:center;}
+small{text-transform: initial;}
+.rounded{
+    border-radius: 1em !important;
+}
+
+.table-primary{background:#232323;color:#f1f1f1;}

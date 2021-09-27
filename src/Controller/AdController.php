@@ -166,14 +166,14 @@ class AdController extends AbstractController
      */
 
     public function delete(Ad $ad,EntityManagerInterface $entityManager){
-        $entityManager->remove($ad);
+                            $entityManager->remove($ad);
 
-        $entityManager->flush();
-        $this->addFlash("success","L'annonce  <em>{$ad->getTitle()}</em> a bien été supprimé");
+                            $entityManager->flush();
+                            $this->addFlash("success","L'annonce  <em>{$ad->getTitle()}</em> a bien été supprimé");
 
-        return $this->redirectToRoute("ads_list");
+                            return $this->redirectToRoute("ads_list");
 
-    }
+                          }
 
     /**
      * Methode pour ajouter 10 au prix de l'annonce
@@ -183,12 +183,12 @@ class AdController extends AbstractController
      */
     public function augment(Ad $ad){
 
-        $ad->setPrice($ad->getPrice() +10);
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($ad);
-        $entityManager->flush();
+                $ad->setPrice($ad->getPrice() +10);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($ad);
+                $entityManager->flush();
 
-        return new JsonResponse(['success'=>200]);
-    }
+                return new JsonResponse(['success'=>200]);
+              }
 }
 
