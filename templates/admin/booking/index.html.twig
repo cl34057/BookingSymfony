@@ -5,13 +5,14 @@
         {% block body %}
             <main class="container-fluid mt-5">
                 <h1 class="my-5">Administration des réservations</h1>
+                      <div class="row mx-3">
                    
-                        <table class="table-primary">
-                            <thead>
+                        <table class="table">
+                            <thead class="table-primary  text-center">
                                 <th>Id</th>
                                 <th>Date</th>
                                 <th>Visiteur</th>
-                                <th>Annonce/th>
+                                <th>Annonce</th>
                                 <th>Date début</th>
                                 <th>Date fin</th>
                                 <th></th>
@@ -19,7 +20,7 @@
 
                             </thead>
                             <tbody>
-                                {% for booking in bookings %}
+                                {% for booking in pagination.data %}
                                     <tr>
                                         <td>{{booking.id}}</td>
                                         <td>{{booking.createdAt|date('d/m/Y H:i')}}</td>
@@ -30,22 +31,20 @@
                                         <td>{{booking.ad.title}}</td>
                                         <td>{{booking.startDate|date('d/m/Y')}}</td>
                                         <td>{{booking.endDate|date('d/m/Y')}}</td>
-                                        <td>
-                                            <a href="{{path('admin_booking_edit',{'id':booking.id})}}" class="btn btn-info btn-sm"><i class="fas-fa-edit"></i></a>
-                                        </td>
-                                        <td>
-                                            <a href="{{path('admin_booking_delete',{'id':booking.id})}}" class="btn btn-danger btn-sm"><i class="fas-fa-trash"></i></a>
+                                        <td align="center">
+                                            <a href="{{path('admin_booking_edit',{'id':booking.id})}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
+                                       
+                                            <a href="{{path('admin_booking_delete',{'id':booking.id})}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 {% endfor %}
                                 
                             </tbody>
-                            
-                        
-                        </table>
-                   
-                
-            </main>
-        {% endblock %}
+                         </table>
 
+                         {{pagination.display()}}
+                   
+                </div>
+            </main>
+    
 {% endblock %}

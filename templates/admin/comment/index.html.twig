@@ -7,7 +7,7 @@
         <h1 class="my-3 p-3">Gestion des commentaires </h1>
             <div class="row mx-3">
                 <table class="table">
-                    <thead class="table-primary">
+                    <thead class="table-primary text-center">
                         <th>ID</th>
                         <th>Date</th>
                         <th>Auteur</th>
@@ -15,11 +15,11 @@
                         <th>Note</th>
                         <th>Annonce</th>
                         <th></th>
+                     
                         <th></th>
-
                     </thead>
                      <tbody>
-                        {% for comment in comments %}
+                        {% for comment in pagination.data %}
                             <tr>
                                 <td>{{comment.id}}</td>
                                 <td>{{comment.createdAt|date('d/m/Y H:i')}}</td>
@@ -31,20 +31,21 @@
                                 <td>{{comment.content}}</td>
                                 <td><span class="badge badge-primary">{{comment.ad.averageRatings|number_format(1,',','')}}</span></td>
                                 <td>{{comment.ad.title}}</td>
-                                <td>
-                                    <a href="{{path('admin_comment_edit',{'id':comment.id})}}" class="btn btn-info btn-sm"><i class="fas-fa-edit"></i></a>
+                                <td >
+                                    <a href="{{path('admin_comment_edit',{'id':comment.id})}}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
                                 </td>
                                 <td>
-                                     <a href="{{path('admin_comment_delete',{'id':comment.id})}}" class="btn btn-danger btn-sm"><i class="fas-fa-trash"></i></a>
+                                     <a href="{{path('admin_comment_delete',{'id':comment.id})}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}
                         
                     </tbody>
-                    
-                
+
                 </table>
-            </div>
-        </h1>
+
+                        {{pagination.display()}}
+             </div>
+       
     </main>
 {% endblock %}

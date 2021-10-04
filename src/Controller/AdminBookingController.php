@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Booking;
+use App\Service\Pagination;
 use App\Form\AdminBookingType;
 use App\Repository\BookingRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,14 +17,23 @@ class AdminBookingController extends AbstractController
 {
     /**
      * Affiche la liste des réservations
-     * @Route("/admin/bookings", name="admin_bookings_list")
+     * @Route("/admin/bookings/{page<\d+>?1}", name="admin_bookings_list")
      * 
      * @return Response
      */
-    public function index(BookingRepository $repo)
+    public function index(BookingRepository $repo,Pagination $paginationService,$page)
     {
+        $paginationService->setEntityClass(Booking::class)
+                            ->setPage($page)
+                            //->setRoute('admin_bookings_list')
+                            ;
+
+                            
+                            
         return $this->render('admin/booking/index.html.twig', [
-            'bookings' => $repo->findAll()
+          
+            //contient toutes les methodes (bookings,page...)
+           'pagination'=>$paginationService
         ]);
     }
 
@@ -64,6 +76,7 @@ class AdminBookingController extends AbstractController
      * Suppression d'une reservation via l'admin
      * @Route("/admin/booking/{id}/delete",name="admin_booking_delete")
      * @param Booking $booking
+     * 
      * @param EntityMAnagerInterface $manager
      * @return Response
      * 
@@ -76,7 +89,7 @@ class AdminBookingController extends AbstractController
         $manager->remove($booking);
         $manager->flush();
 
-        $this->addFlash("success","reservation n° {$booking->getId} a été supprimé !");
+        $this->addFlash("success","reservation n° {$booking->getId()} a été supprimé !");
         
         return $this->redirectToRoute('admin_bookings_list');
 
