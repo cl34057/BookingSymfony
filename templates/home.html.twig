@@ -3,177 +3,51 @@
 {% block body %}
 <main class="container">
     <div class="jumbotron">
-    <h2 class="h1">{{title}}</h2>
-        <p>Appartement, maison, seul ou en famille, pour quelques jours ou pour plusieurs années :
-            trouvez le logement qui vous ressemble parmi des centaines d'annonces immobilières..</p>
-            <br>
-        <p>En utilisant votre espace de recherche MyBooking, vous optimisez votre recherche immobilière :  
-- Vous enregistrez votre dossier locataire pour déposer directement en ligne vos demandes de location
-- Vous enregistrez et retrouvez vos biens favoris en quelques clics
-- Vous créez vos alertes personnalisées pour être prévenu par email quand de nouveaux biens sont disponibles.</p>
+                <h2 class="h1">Booking</h2>
+                    <p>Appartement, maison, seul ou en famille, pour quelques jours ou pour plusieurs années :
+                        trouvez le logement qui vous ressemble parmi des centaines d'annonces immobilières..</p>
+                        <br>
+                    <p>En utilisant votre espace de recherche MyBooking, vous optimisez votre recherche immobilière :  
+            - Vous enregistrez votre dossier locataire pour déposer directement en ligne vos demandes de location
+            - Vous enregistrez et retrouvez vos biens favoris en quelques clics
+            - Vous créez vos alertes personnalisées pour être prévenu par email quand de nouveaux biens sont disponibles.</p>
         
     </div>
     <div class="card-body">
                         <a href="#" class="btn btn-primary">+ d'infos</a>
-                   </div>
-    <h3 class="h1 mt-3 mb-4"> Offre speciale </h3>
-    <section class="row">
+    </div>
+    <h3 class="h1 mt-3 mb-4">Annonces les mieux notées </h3>
+                        <section class="row">
 
-            <article class="col-md-4">
-                <div class="card mb-3">
-                    <h3 class="card-header  text-white bg-info">Studio, <strong>40 &euro;</strong>/nuit</h3>
-                    <div class="card-body">
-                        <h5 class="card-title">Venise</h5>
-                      <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum dolores voluptatum reiciendis minus, odit ex placeat accusamus cum iusto dolor. Aliquid eius officiis facere minima ab in cupiditate voluptate quos.</span></p>
-                                         
-                    </div>
-                    <!--
-                    <svg xmlns="https://placeimg.com/640/480/people" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                        <rect width="100%" height="100%" fill="#868e96"></rect>
-                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                    </svg>
-                    -->
+                                {% for  data in ads %}
 
-                    <img style="height: 220px; width: 100%; display: block;" src="https://placeimg.com/640/480/people" alt="Card Image">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                   <div class="card-body">
-                        <a href="#" class="btn btn-primary">+ d'infos</a>
-                   </div>
-                   
-                    <div class="card-footer text-muted">
-                        Pas encore noté
-                    </div>
-                    </div>
-                   
+                                {% include 'ad/_ad.html.twig' with {'ad':data.annonce} %}
 
+                                {% endfor %}
+                                
+                        </section>
 
-            </article>
-            <article class="col-md-4">
-                <div class="card mb-3 ">
-                    <h3 class="card-header text-white bg-secondary">3 Chambres, <strong>50 &euro;</strong>/nuit</h3>
-                    <div class="card-body">
-                        <h5 class="card-title">Loft à londres</h5>
-                      <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum dolores voluptatum reiciendis minus, odit ex placeat accusamus cum iusto dolor. Aliquid eius officiis facere minima ab in cupiditate voluptate quos.</span></p>
-                                         
-                    </div>
-                    <!--
-                    <svg xmlns="https://placeimg.com/640/480/people" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                        <rect width="100%" height="100%" fill="#868e96"></rect>
-                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                    </svg>
-                    -->
-
-                    <img style="height: 220px; width: 100%; display: block;" src="https://placeimg.com/640/480/arch" alt="Card Image">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                   <div class="card-body">
-                        <a href="#" class="btn btn-primary">+ d'infos</a>
-                   </div>
-                   
-                    <div class="card-footer text-muted">
-                        Pas encore noté
-                    </div>
-                    </div>
-                   
-
-
-            </article>
-            <article class="col-md-4">
-                <div class="card mb-3 ">
-                    <h3 class="card-header text-white bg-primary">Hotel 4 * avec piscine <strong>250 &euro;</strong>/nuit</h3>
-                    <div class="card-body">
-                        <h5 class="card-title">Portugal</h5>
-                      <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum dolores voluptatum reiciendis minus, odit ex placeat accusamus cum iusto dolor. Aliquid eius officiis facere minima ab in cupiditate voluptate quos.</span></p>
-                                         
-                    </div>
-                    <!--
-                    <svg xmlns="https://placeimg.com/640/480/people" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                        <rect width="100%" height="100%" fill="#868e96"></rect>
-                        <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                    </svg>
-                    -->
-
-                    <img style="height: 220px; width: 100%; display: block;" src="https://placeimg.com/640/480/any" alt="Card Image">
-                    <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                   <div class="card-body">
-                        <a href="#" class="btn btn-primary">+ d'infos</a>
-                   </div>
-                   
-                    <div class="card-footer text-muted">
-                        Pas encore noté
-                    </div>
-                    </div>
-                   
-
-
-            </article>
-    </section>
     <h3 class="h1 mt-5 mb-4">Nos meilleurs annonceurs </h3>
-    <section class="row">
-
-            <article class="col-md-3">
-                <div class="card mb-3">
-                    <h3 class="card-header   text-white bg-dark">Francis R</h3>
-                    <div class="card-body">
-                      <img src="http://placehold.it/100x100" alt="avatar de...." class="float-left me-3">
-                      <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum dolores voluptatum reiciendis minus, odit ex placeat accusamus cum iusto dolor. Aliquid eius officiis facere minima ab in cupiditate voluptate quos.</span></p>
-                                <a href="#" class="btn btn-dark">+ d'infos</a>           
-                    </div>
-                                                   
-                    </div>
-                               
+                        <section class="row">
 
 
-            </article>
-            <article class="col-md-3">
-                <div class="card mb-3">
-                    <h3 class="card-header   text-white bg-dark">Serge G</h3>
-                    <div class="card-body">
-                      <img src="http://placehold.it/100x100" alt="avatar de...." class="float-left me-3">
-                      <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum dolores voluptatum reiciendis minus, odit ex placeat accusamus cum iusto dolor. Aliquid eius officiis facere minima ab in cupiditate voluptate quos.</span></p>
-                                <a href="#" class="btn btn-dark">+ d'infos</a>           
-                    </div>
-                                                   
-                    </div>
-                               
+                                {% for data in users %}
+                                <article class="col">
+                                    <div class="card mb-3">
+                                        <h3 class="h4 card-header text-white bg-dark">{{data.user.fullName}}</h3>
+                                        <div class="card-body">
+                                        <img src="{{data.user.avatar}}" alt="avatar de{{data.user.fullName}}" class="float-left mr-3">
+                                        <p><span>{{data.user.introduction}}</span></p>
+                                                    <a href="{{path('user_show',{'slug':data.user.slug})}}" class="btn btn-dark">+ d'infos</a>           
+                                        </div>
+                                                                    
+                                 </div>
+                                                
 
 
-            </article>
-            <article class="col-md-3">
-                <div class="card mb-3">
-                    <h3 class="card-header   text-white bg-dark">Pascal L</h3>
-                    <div class="card-body">
-                      <img src="http://placehold.it/100x100" alt="avatar de...." class="float-left me-3">
-                      <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum dolores voluptatum reiciendis minus, odit ex placeat accusamus cum iusto dolor. Aliquid eius officiis facere minima ab in cupiditate voluptate quos.</span></p>
-                                <a href="#" class="btn btn-dark">+ d'infos</a>           
-                    </div>
-                                                   
-                    </div>
-                               
-
-
-            </article>
-            <article class="col-md-3">
-                <div class="card mb-3">
-                    <h3 class="card-header   text-white bg-dark">Jerome M</h3>
-                    <div class="card-body">
-                      <img src="http://placehold.it/100x100" alt="avatar de...." class="float-left me-3">
-                      <p><span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum dolores voluptatum reiciendis minus, odit ex placeat accusamus cum iusto dolor. Aliquid eius officiis facere minima ab in cupiditate voluptate quos.</span></p>
-                                <a href="#" class="btn btn-dark">+ d'infos</a>           
-                    </div>
-                                                   
-                    </div>
-                               
-
-
-            </article>
-        
-    </section>
+                                </article>
+                            {% endfor %}
+                        </section>
 </main>
 
 {% endblock %}

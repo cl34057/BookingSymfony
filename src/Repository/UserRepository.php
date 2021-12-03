@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\User;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +20,20 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+   
+    public function findBestUsers($limit = 4){
 
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->createQueryBuilder('u')                                                     //paramètre ou va se construire la requête est 'u' sur user
+                    ->select('u as user, AVG(c.rating) as avgRatings,COUNT(c) as sumComments')    //Trier nos annonceurs par les notes (alias user, avgRatings et sumComments) 
+                    ->join('u.Ads','a')                                                           //jointure recuperer les annonces
+                    ->join('a.comments','c')                                                      //jointure recuperer les commentaires
+                    ->groupBy('u')                                                                //grouper par utilisateur u
+                    ->having('sumComments > 3')                                                   //Annonce superieur à 3
+                    ->orderBy('avgRatings','DESC')                                                //ordonner par rapport au notes 'avgRatings' descendant DESC
+                    ->setMaxResults($limit)                                                       //On met le max de resultat
+                    ->getQuery()                                                                  //chercher la requête
+                    ->getResult()                                                                 //chercher le resultat
+                    ;
+
     }
-    */
 }
